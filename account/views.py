@@ -3,12 +3,6 @@ from django.contrib import messages
 from .forms import CreateUserForm
 
 
-def index(request):
-    name = 'Kenneth Aremoh'
-    context = {'name': name}
-    return render(request, 'account/index.html', context)
-
-
 def sign_up(request):
     # User Registration Function
     form = CreateUserForm()
@@ -24,4 +18,4 @@ def sign_up(request):
 
 
 def sign_in(request):
-    return render(request, 'account/signup.html')
+    return render(request, 'account/signin.html')
