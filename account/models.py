@@ -1,11 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
-
-STATUS_CHOICES = (
-    ('Applicane', 'Applicant'),
-    ('Employer', 'Employer')
-)
+from .states_status import STATUS_CHOICES, STATE_CHOICES
 
 
 class User(AbstractUser):
@@ -21,7 +16,7 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=75, null=True, blank=True)
-    state = models.CharField(max_length=35)
+    state = models.CharField(max_length=35, choices=STATE_CHOICES)
     about = models.TextField()
     profile_photo = models.ImageField()
 
