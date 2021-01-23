@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm
 
@@ -18,4 +20,33 @@ def sign_up(request):
 
 
 def sign_in(request):
+    # User Login function
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.status == 'Employer':
+            login(request, user)
+            # Message here
+            return redirect('employer_dashboard')
+        if user is not None and user.status == 'Applicant':
+            login(request, user)
+            # Message here
+            return redirect('applicant_dashboard')
     return render(request, 'account/signin.html')
+
+
+@login_required
+def employer_dashboard(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'account/employer_dashboard.html', context)
+
+
+@login_required
+def applicant_dashboard(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'account/applicant_dashboard.html', context)

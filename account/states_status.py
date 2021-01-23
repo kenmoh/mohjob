@@ -43,6 +43,6 @@ STATE_CHOICES = (
 
 
 STATUS_CHOICES = (
-    ('Applicane', 'Applicant'),
+    ('Applicant', 'Applicant'),
     ('Employer', 'Employer')
 )
