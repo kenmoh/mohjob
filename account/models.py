@@ -16,3 +16,14 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=75, null=True, blank=True)
+    state = models.CharField(max_length=35)
+    about = models.TextField()
+    profile_photo = models.ImageField()
+
+    def __str__(self) -> str:
+        return self.user.username
