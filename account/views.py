@@ -29,15 +29,21 @@ def sign_in(request):
 
         if user is not None and user.status == 'Employer':
             login(request, user)
-            print(user.status)
-            # Message here
+            messages.success(request, f"You're now logged in !")
             return redirect('employer_dashboard')
+
         if user is not None and user.status == 'Applicant':
             login(request, user)
-            print(user.status)
-            # Message here
+            messages.success(request, f"You're now logged in !")
+
             return redirect('applicant_dashboard')
     return render(request, 'account/signin.html')
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('index')
 
 
 @login_required
