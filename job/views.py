@@ -21,4 +21,5 @@ def add_job(request):
             job.save()
             messages.success(request, f'Job posted successfully !')
             return redirect('employer_dashboard')
-    return redirect(request, 'job/add_job.html')
+    context = {'form': form}
+    return render(request, 'job/add_job.html', context)

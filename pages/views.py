@@ -4,6 +4,6 @@ from job.models import Job
 
 def index(request):
 
-    jobs = Job.objects.all()
+    jobs = Job.objects.all().order_by('posted_at')
     context = {'jobs': jobs}
     return render(request, 'pages/index.html', context)

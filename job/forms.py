@@ -7,4 +7,4 @@ from .models import Job
 class AddJobForm(forms.ModelForm):
     class Meta:
         model = Job
-        exclude = ('modified_at',)
+        exclude = ('modified_at', 'user')

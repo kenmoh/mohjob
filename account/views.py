@@ -13,8 +13,9 @@ def sign_up(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account for "{username}" was created')
-            return redirect('index')
+            messages.success(
+                request, f'Account for "{username}" was created. You may now sign into your account.')
+            return redirect('sign_in')
     context = {'form': form}
     return render(request, 'account/signup.html', context)
 

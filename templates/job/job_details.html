@@ -10,7 +10,7 @@
 
     <p class='text-blue-500'>Title: {{ job.title }}</p>
     <p>Description: {{ job.description }}</p>
-    <p>Posted by: {{ job.duser }}</p>
+    <p>Posted by: {{ job.user.username.title }}</p>
 
 
 {% endblock content %}

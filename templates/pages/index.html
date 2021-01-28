@@ -8,10 +8,12 @@
 
 <h1 class="text-center font-thin text-3xl mt-4">{{ name }}</h1>
 {% for job in jobs %}
+
     <p class='text-blue-500'>Title: {{ job.title }}</p>
     <p>Description: {{ job.description }}</p>
-    <p>Posted by: {{ job.username }}</p>
+    <p>Posted by: {{ job.user.username.title }}</p>
     <a href="{% url 'job_details' job.id %}">View Detail</a>
+
 {% endfor %}
 
 {% endblock content %}
