@@ -15,3 +15,11 @@ class Job(models.Model):
 
     def skills_list(self):
         return self.skills.split(',')
+
+
+class Application(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    content = models.TextField()
+    experience = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
