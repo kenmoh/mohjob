@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'job.apps.JobConfig',
     'pages.apps.PagesConfig',
+    'usermessages.apps.UsermessagesConfig',
+
 ]
 
 MIDDLEWARE = [

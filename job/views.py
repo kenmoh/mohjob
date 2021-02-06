@@ -15,14 +15,15 @@ def job_details(request, job_id):
 def add_job(request):
     form = AddJobForm()
     if request.method == 'POST':
-        form = AddJobForm(request.POST)
 
+        form = AddJobForm(request.POST)
         if form.is_valid():
             job = form.save(commit=False)
-            job.posted_by = request.user
+            job.user = request.user
             job.save()
             messages.success(request, f'Job posted successfully !')
             return redirect('employer_dashboard')
+
     context = {'form': form}
     return render(request, 'job/add_job.html', context)
 
@@ -36,10 +37,10 @@ def job_application(request, job_id):
         if form.is_valid():
             application = form.save(commit=False)
             application.user = request.user
+            application.job = job
             application.save()
-
             messages.success(request, "Application sent successfully !")
             return redirect('applicant_dashboard')
 
     context = {'form': form}
-    return render(request, 'job/add_job.html', context)
+    return render(request, 'job/job_application.html', context)

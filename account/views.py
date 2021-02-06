@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm
+from job.models import Job
 
 
 def sign_up(request):
@@ -54,7 +55,7 @@ def employer_dashboard(request):
     return render(request, 'account/employer_dashboard.html', context)
 
 
-@login_required
+@ login_required
 def applicant_dashboard(request):
     user = request.user
     context = {'user': user}

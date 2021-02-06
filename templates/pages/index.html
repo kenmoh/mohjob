@@ -2,18 +2,26 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %} Home {% endblock title %}
-
 {% block content %}
-
-<h1 class="text-center font-thin text-3xl mt-4">{{ name }}</h1>
-{% for job in jobs %}
-
-    <p class='text-blue-500'>Title: {{ job.title }}</p>
-    <p>Description: {{ job.description }}</p>
-    <p>Posted by: {{ job.user.username.title }}</p>
-    <a href="{% url 'job_details' job.id %}">View Detail</a>
-
-{% endfor %}
-
+<div class="md:container md: mx-auto px-20 bg-black">
+    <div class="grid grid-cols-12">
+        <div class="col-span-2 px-1">3</div>
+        <div class="col-span-8 px-1 bg-white my-2">
+            {% for job in jobs %}
+           <div class="bg-blue rounded overflow-hidden shadow-md p-4 grid grid-cols-12">
+              <div class="col-span-2"> <img src="" alt=""> IMAGE HERE</div>
+              <div class="col-span-10">
+                <ul class="flex justify-between">
+                    <li class=""><a href="{% url 'job_details' job.id %}">{{ job.title }}</a></li>
+                    <li class="text-center">{{ job.location }}</li>
+                    <li class="">N {{ job.salary_from }} - N{{ job.salary_to }}</li>
+                   </ul>
+              </div>
+           </div>
+           {% endfor %}
+        </div>
+        <div class="col-span-2 px-1">4</div>
+    </div>
+</div>
+ <h1 class="text-center font-thin text-3xl mt-4">{{ name }}</h1>
 {% endblock content %}

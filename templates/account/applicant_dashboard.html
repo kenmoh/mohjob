@@ -5,5 +5,9 @@
 {% include 'partials/_message.html' %}
 
     <h1>This is the Applicant dashboard</h1>
+    {% for application in request.user.applications.all %}
+    <p>{{ application.title }}</p>
+    <p>{{ application.posted_at }}</p>
+    {% endfor %}
 
 {% endblock %}

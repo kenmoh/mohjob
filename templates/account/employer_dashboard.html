@@ -5,5 +5,10 @@
 {% include 'partials/_message.html' %}
 
     <h1>This is the Employer dashboard</h1>
+    <a href="{% url 'add_job' %}">Post Job</a>
+    {% for job in request.user.jobs.all %}
+    <p>{{ job.title }}</p>
+    <p>{{ job.posted_at }}</p>
+    {% endfor %}
 
 {% endblock %}
