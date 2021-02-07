@@ -10,8 +10,9 @@
 
 <form method="POST">
     {% csrf_token %}
-    
-    {{ form.as_p }}
+    {% for field in form %}
+        <div>{{ field }}</div>
+    {% endfor %}
     <button>Send</button>
 </form>
 

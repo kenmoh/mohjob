@@ -16,7 +16,7 @@ class Job(models.Model):
     def __str__(self) -> str:
         return self.title
 
-    def skills_list(self):
+    def skills_as_list(self):
         return self.skills.split(',')
 
 

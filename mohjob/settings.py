@@ -118,6 +118,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+
+MEDIA_URL = '/img/'
+MEDIA_ROOT = Path(BASE_DIR, 'static/img')
+
 # Messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'

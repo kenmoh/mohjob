@@ -6,11 +6,39 @@
 
 {% block content %}
 
-<h1 class="text-center font-thin text-3xl mt-4">{{ name }}</h1>
-
-    <p class='text-blue-500'>Title: {{ job.title }}</p>
-    <p>Description: {{ job.description }}</p>
-    <p>Posted by: {{ job.user.username.title }}</p>
+<div class="md:container md: mx-auto px-20 bg-gray-50">
+        <div class="bg-white w-2/3 px-1 my-2 mx-auto shadow">
+          <div class="text-center">
+              <img src="{% static 'img/logo.png' %}" alt="" class="mx-auto h-32 w-32 rounded-full p-2">
+              <span class="font-bold text-lg text-gray-500">{{ job.user.username }}</span>
+              <span class="block text-gray-300 text-sm">{{ job.location }}</span>
+          </div>
+          <div class="flex item-center w-2/4 m-6 border-solid border-2 border-gray-100 justify-between rounded">
+            <div class="p-2">
+                <span class="font-bold text-lg text-gray-500">{{ job.title }}</span>
+                <span class="block text-gray-300 text-sm">{{ job.location }}</span>
+            </div>
+            <div class="p-2">
+                <img src="{% static 'img/verified-icon.jpg' %}" alt="" class="mx-auto h-8">
+            </div>
+          </div>
+          <div class="m-6">
+              <p class="text-lg mb-2 text-gray-500 font-bold">Skills:</p>
+              {% for skill in job.skills_as_list %}
+              <span class="bg-blue-400 py-1 px-3 text-center text-gray-100 font-light rounded-full">{{ skill }}</span>
+              {% endfor %}
+          </div>
+          <div class="m-6">
+            <p class="text-lg mb-2 text-gray-500 font-bold">Description:</p>
+            <small class="text-gray-500 text-xs">{{ job.description }}</small>
+            
+          </div>
+          
+              <a href="{% url 'job_application' job.id %}" class="bg-blue-800 py-2 px-8 m-6 text-gray-100">Apply</a>
+              <br>
+              <br>         
+        </div>
+</div>
 
 
 {% endblock content %}
