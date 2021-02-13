@@ -1,44 +1,60 @@
-
 {% extends "base.html" %}
+<!--  -->
 {% load static %}
-
-{% block title %} Home {% endblock title %}
-
+<!--  -->
 {% block content %}
 
-<div class="md:container md: mx-auto px-20 bg-gray-50">
-        <div class="bg-white w-2/3 px-1 my-2 mx-auto shadow">
-          <div class="text-center">
-              <img src="{% static 'img/logo.png' %}" alt="" class="mx-auto h-32 w-32 rounded-full p-2">
-              <span class="font-bold text-lg text-gray-500">{{ job.user.username }}</span>
-              <span class="block text-gray-300 text-sm">{{ job.location }}</span>
-          </div>
-          <div class="flex item-center w-2/4 m-6 border-solid border-2 border-gray-100 justify-between rounded">
-            <div class="p-2">
-                <span class="font-bold text-lg text-gray-500">{{ job.title }}</span>
-                <span class="block text-gray-300 text-sm">{{ job.location }}</span>
-            </div>
-            <div class="p-2">
-                <img src="{% static 'img/verified-icon.jpg' %}" alt="" class="mx-auto h-8">
-            </div>
-          </div>
-          <div class="m-6">
-              <p class="text-lg mb-2 text-gray-500 font-bold">Skills:</p>
-              {% for skill in job.skills_as_list %}
-              <span class="bg-blue-400 py-1 px-3 text-center text-gray-100 font-light rounded-full">{{ skill }}</span>
-              {% endfor %}
-          </div>
-          <div class="m-6">
-            <p class="text-lg mb-2 text-gray-500 font-bold">Description:</p>
-            <small class="text-gray-500 text-xs">{{ job.description }}</small>
-            
-          </div>
-          
-              <a href="{% url 'job_application' job.id %}" class="bg-blue-800 py-2 px-8 m-6 text-gray-100">Apply</a>
-              <br>
-              <br>         
-        </div>
-</div>
+<div class="container bg-white w-75 my-5">
+  <br />
+  <div class="rounded-circle bg-width">
+    <img
+      src="{% static 'img/logo.jpg' %}"
+      class="rounded-circle img-circle-detail"
+      alt="..."
+    />
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <h4 class="text-center text-muted">{{ job.user.username.title }}</h4>
+    {% if job.user.is_verified %}
+    <img
+      src="{% static 'img/verified-icon.jpg' %}"
+      class="verified mr-3"
+      alt="..."
+    />
+    {% endif %}
+  </div>
 
+  <div
+    class="row border border-default m-2 bg-white rounded text-muted fs-6 w-75 mx-auto p-3"
+  >
+    <div class="col-sm-12 col-md-6 col-lg-6 border-end">
+      <h6>{{ job.title }}</h6>
+      <span>Location: {{ job.location}}</span>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <span class="text-muted">Since: 3 days ago</span>
+    </div>
+  </div>
+
+  <div class="mx-5 mt-3">
+    <h5>Description:</h5>
+    <p class="fs text-muted fw-light">{{ job.description }}</p>
+  </div>
+  <div class="mx-5">
+    <h5>Skills:</h5>
+    {% for skill in job.skills_as_list %}
+    <span class="badge rounded-pill bg-secondary mb-3">{{ skill }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="mx-5">
+    <a
+      type="button"
+      class="btn btn-primary btn-sm mb-5"
+      href="{% url 'job_application' job.id %}"
+      >Apply for this job</a
+    >
+  </div>
+</div>
 
 {% endblock content %}

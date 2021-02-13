@@ -1,11 +1,12 @@
 from django.db import models
 from account.models import User
+from account.states_status import STATE_CHOICES
 
 
 class Job(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    location = models.CharField(max_length=300, blank=True, null=True)
+    location = models.CharField(max_length=300, choices=STATE_CHOICES)
     skills = models.CharField(max_length=300, blank=True, null=True)
     salary_from = models.PositiveIntegerField()
     salary_to = models.PositiveIntegerField()

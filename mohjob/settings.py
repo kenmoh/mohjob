@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'job.apps.JobConfig',
     'pages.apps.PagesConfig',
     'usermessages.apps.UsermessagesConfig',
+    "crispy_forms",
+    "crispy_tailwind",
 
 ]
 
@@ -126,3 +128,10 @@ MEDIA_ROOT = Path(BASE_DIR, 'static/img')
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+# Crispy Forms
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+# Login Redirect
+LOGIN_URL = 'sign_in'

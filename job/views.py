@@ -5,6 +5,7 @@ from .models import Job
 from .forms import AddJobForm, ApplicationForm
 
 
+@login_required
 def job_details(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
     context = {'job': job}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+<div class="container">
+  <div
+    class="container p-2 mx-auto max-w-2xl mt-20 flex flex-col space-y-4 justify-center items-center"
+  >
+    {% for job in jobs %}
+    <div class="bg-white w-full flex items-center p-2 rounded shadow">
+      <div class="relative flex items-center space-x-4">
+        <img
+          src="{% static 'img/logo.jpg' %}"
+          alt="My profile"
+          class="w-24 h-18"
+        />
+      </div>
+      <div class="flex-grow p-3">
+        <div class="flex justify-between">
+          <div class="sm:text-sm font-semibold text-gray-500">
+            {{ job.title }}
+          </div>
+          <div class="text-sm text-gray-500">3hrs ago</div>
+        </div>
+        <div class="flex justify-between">
+          <div class="text-lg font-medium text-gray-400">
+            {{ job.user.username.title }}
+          </div>
+          <div class="text-md text-gray-500 bg-gray-100 px-2">
+            {{ job.location }}
+          </div>
+        </div>
+        <div class="text-sm text-gray-500">
+          {{ job.description|truncatechars:50 }}
+        </div>
+        <div class="flex border-t border-gray-300 mt-2 justify-between">
+          <div class="text-sm text-gray-500 px-2 mt-1">FINANCE</div>
+          <div class="text-sm text-gray-500 px-2 mt-1">FULL TIME</div>
+          <div
+            class="text-sm text-gray-500 bg-blue-200 p-1 mt-1 rounded-full my-auto"
+          >
+            <a class="px-4 align-middle" href="{% url 'job_details' job.id %}"
+              >Details</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="p-2">
+        {% if job.user.is_verified %}
+        <img
+          src="{% static 'img/verified.png' %}"
+          alt="My profile"
+          class="h-4 w-5 md:h-4 md:w-4 block bottom-0 right-0"
+        />
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

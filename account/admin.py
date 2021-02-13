@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from .models import User, Profile
+from .models import EmployerProfile, User, Profile
 
 
 class MyUserAdmin(UserAdmin):
@@ -24,3 +24,4 @@ class ProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(EmployerProfile)

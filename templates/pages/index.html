@@ -1,28 +1,49 @@
-
 {% extends "base.html" %}
+<!--  -->
 {% load static %}
-
+<!--  -->
 {% block content %}
-<div class="md:container md: mx-auto px-20">
-    <div class="grid grid-cols-12">
-        <div class="col-span-3 px-1">Side Nav</div>
-        <div class="col-span-7 px-1 my-2">
-            {% for job in jobs %}
-           <div class="bg-white rounded overflow-hidden shadow-md m-1 p-1 grid grid-cols-12">
-              <div class="col-span-1"> <img src="{% static 'img/logo.jpg' %}" alt="" class="h-12 rounded-full"></div>
-              <div class="col-span-11">
-                <ul class="grid grid-cols-12 justify-between text-gray-400 text-sm">
-                    <li class="col-span-6 my-4 mx-4"><a class="bg-gray-50 p-2 rounded" href="{% url 'job_details' job.id %}">{{ job.title }}</a></li>
-                    <li class="col-span-3 my-4">{{ job.location }}</li>
-                    <li class="col-span-3 my-4">N {{ job.salary_from }} - N {{ job.salary_to }}</li>
-                </ul>
-              </div>
-           </div>
-           {% endfor %}
+
+<div class="container">
+  <!-- <div class="col-sm-12 col-md-12 col-lg-7 mx-auto"> -->
+    {% for job in jobs %}
+    <div class="row shadow-sm mt-1 bg-white rounded text-muted fs-6 w-75 mx-auto">
+      <div class="col-sm-12 col-md-12 col-lg-1 mx-auto">
+        <img
+          src="{% static 'img/logo.jpg' %}"
+          class="rounded-circle img-circle"
+          alt="..."
+        />
+        <div class="text-center d-flex align-items-center">
+          <span class="fw-bold">{{ job.user.username }}</span>
+          {% if job.user.is_verified %}
+          <img
+            src="{% static 'img/verified-icon.jpg' %}"
+            class="verified mr-3"
+            alt="..."
+          />
+          {% endif %}
         </div>
-        <div class="col-span-2 px-1  text-center">
-           Something Here
-        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <p class="mt-4 mx-5">{{ job.title}}</p>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-2 my-auto">
+        <p class="mt-4 mx-5">{{ job.location}}</p>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3 my-auto">
+        N{{ job.salary_from }} - N{{ job.salary_to }}
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-2 my-auto text-white">
+        <a
+          class="text-decoration-none text-reset btn btn-block btn-sm btn-primary"
+          type="button"
+          href="{% url 'job_details' job.id %}"
+          >Details</a
+        >
+      </div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock content %}

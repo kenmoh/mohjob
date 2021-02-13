@@ -22,3 +22,11 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return self.user.username
+
+
+class EmployerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=75, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f'{self.company_name}'

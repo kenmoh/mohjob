@@ -34,12 +34,20 @@ def sign_in(request):
             messages.success(request, f"You're now logged in !")
             return redirect('employer_dashboard')
 
+        else:
+            messages.error(request, f'Incorrect username or password')
+
         if user is not None and user.status == 'Applicant':
             login(request, user)
             messages.success(request, f"You're now logged in !")
-
             return redirect('applicant_dashboard')
+
+        else:
+            messages.error(request, f'Incorrect username or password')
+
     return render(request, 'account/signin.html')
+
+# Fuction to logout a user
 
 
 @login_required
@@ -48,6 +56,7 @@ def user_logout(request):
     return redirect('index')
 
 
+# Employer Dashboard function
 @login_required
 def employer_dashboard(request):
     user = request.user
@@ -55,6 +64,7 @@ def employer_dashboard(request):
     return render(request, 'account/employer_dashboard.html', context)
 
 
+# Applicant/Job Seeker Dashboard function
 @ login_required
 def applicant_dashboard(request):
     user = request.user

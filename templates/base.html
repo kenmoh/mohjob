@@ -2,17 +2,27 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MohJobs</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body class="bg-gray-50">
-    {% block content %}
-    {% endblock content %}
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" /> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+  </head>
+  <body class="bg-color">
+    {% include 'partials/_navbar.html' %} {% block content %} {% comment %}
+    ------ {% endcomment %} {% endblock content %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+      integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+      crossorigin="anonymous"
+    ></script>
     <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    
-</body>
+  </body>
 </html>

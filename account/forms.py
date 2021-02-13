@@ -5,10 +5,14 @@ from .models import User
 
 
 class CreateUserForm(UserCreationForm):
-    username = forms.CharField()
-    email = forms.EmailField()
-    password1 = forms.PasswordInput()
-    password2 = forms.PasswordInput()
+    username = forms.CharField(label='', required=True, widget=forms.TextInput(
+        attrs={'class': 'form-control form-control-sm mb-3 focus:border-blue-500', 'Placeholder': 'Username'}))
+    email = forms.CharField(label='', required=True, widget=forms.TextInput(
+        attrs={'class': 'form-control form-control-sm mb-3 focus:border-blue-500', 'Placeholder': 'Email'}))
+    password1 = forms.CharField(label='', required=True, widget=forms.PasswordInput(
+        attrs={'class': 'form-control form-control-sm mb-3 focus:border-blue-500', 'Placeholder': 'Password'}))
+    password2 = forms.CharField(label='', required=True, widget=forms.PasswordInput(
+        attrs={'class': 'form-control form-control-sm mb-3 focus:border-blue-500', 'Placeholder': 'Confirm Password'}))
 
     class Meta:
         model = User
@@ -27,3 +31,8 @@ class CreateUserForm(UserCreationForm):
             raise ValidationError(
                 f'The phone number "{phone_number}" is already in use !')
         return phone_number
+
+    def __init__(self, *args, **kwargs):
+        super(CreateUserForm, self).__init__(*args, **kwargs)
+        self.fields['status'].widget.attrs.update(
+            {'class': 'form-control form-control-sm mb-3'})
