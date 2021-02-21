@@ -6,7 +6,7 @@ STATE_CHOICES = (
     ('Adamawa', 'Adamawa'),
     ('Anambra', 'Anambra'),
     ('Awka', 'Awka'),
-    ('akwa ibom', 'Akwa Ibom'),
+    ('Akwa Ibom', 'Akwa Ibom'),
     ('Bauch', 'Bauchi'),
     ('Bayelsa', 'Bayelsa'),
     ('Benue', 'Benue'),

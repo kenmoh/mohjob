@@ -8,4 +8,7 @@ urlpatterns = [
     path('employer_dashboard', views.employer_dashboard, name='employer_dashboard'),
     path('applicant_dashboard', views.applicant_dashboard,
          name='applicant_dashboard'),
+    path('update_applicant/',
+         views.update_applicant, name='update_applicant'),
+    path('update_employer/', views.update_employer, name='update_employer'),
 ]

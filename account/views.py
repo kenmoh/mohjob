@@ -1,9 +1,12 @@
+from django.contrib.messages.api import error, success
+from account.models import EmployerProfile, Profile
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import CreateUserForm
+from .forms import ApplicantProfileForm, ApplicantUpdateForm, CreateUserForm, EmployerProfileForm, EmployerUpdateForm
 from job.models import Job
+from .models import User
 
 
 def sign_up(request):
@@ -59,8 +62,10 @@ def user_logout(request):
 # Employer Dashboard function
 @login_required
 def employer_dashboard(request):
-    user = request.user
-    context = {'user': user}
+    jobs = Job.objects.all().filter(user=request.user)
+    context = {
+        'jobs': jobs
+    }
     return render(request, 'account/employer_dashboard.html', context)
 
 
@@ -70,3 +75,55 @@ def applicant_dashboard(request):
     user = request.user
     context = {'user': user}
     return render(request, 'account/applicant_dashboard.html', context)
+
+
+# Function to Update an Applicant
+def update_applicant(request):
+    user_form = ApplicantUpdateForm(instance=request.user)
+    profile_form = ApplicantProfileForm(instance=request.user.profile)
+
+    if request.method == 'POST':
+        user_form = ApplicantUpdateForm(
+            request.POST or None, instance=request.user)
+        profile_form = ApplicantProfileForm(
+            request.POST or None, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            messages.success(
+                request, 'Profile Updated Successfully !')
+            return redirect('applicant_dashboard')
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+
+    return render(request, 'account/applicant_profile.html', context)
+
+
+# Function to Update an Employer
+def update_employer(request):
+    user_form = EmployerUpdateForm(instance=request.user)
+    profile_form = EmployerProfileForm(instance=request.user.employerprofile)
+
+    if request.method == 'POST':
+        user_form = EmployerUpdateForm(
+            request.POST or None, instance=request.user)
+        profile_form = EmployerProfileForm(
+            request.POST or None, request.FILES, instance=request.user.employerprofile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            messages.success(request, 'Profile Updated Successfully !')
+            return redirect('employer_dashboard')
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+    return render(request, 'account/employer_profile.html', context)

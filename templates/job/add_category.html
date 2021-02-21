@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% load crispy_forms_tags %}
+<!--  -->
+{% block content %}
+<!--  -->
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+    <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 mx-auto">
+      <h2
+        class="text-gray-900 text-lg text-center font-medium title-font mb-5 mx-auto"
+      >
+        Add New Category
+      </h2>
+      {% include 'partials/_message.html' %}
+      <form action="" method="POST" novalidate autocomplete="off">
+        {% csrf_token %}
+        <!--  -->
+        {{ form | crispy }}
+        <div class="flex gap-x-4">
+          <button
+            class="w-1/2 text-white bg-blue-500 border-0 py-2 px-8 hover:bg-blue-600 rounded text-lg"
+          >
+            Add
+          </button>
+          <a
+            href="{% url 'add_job' %}"
+            class="w-1/2 text-white text-center bg-red-500 border-0 py-2 px-8 hover:bg-red-600 rounded text-lg"
+            >Cancel</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}

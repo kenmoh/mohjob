@@ -71,8 +71,11 @@ WSGI_APPLICATION = 'mohjob.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mohjobs',
+        'USER': 'postgres',
+        'PASSWORD': '@areneth',
+        'HOST': 'localhost'
     }
 }
 
@@ -126,7 +129,8 @@ MEDIA_ROOT = Path(BASE_DIR, 'static/img')
 
 # Messages
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
+    messages.ERROR: 'bg-red-400 p-2 rounded text-white ',
+    messages.SUCCESS: 'bg-green-400 p-2 rounded text-white'
 }
 # Crispy Forms
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'

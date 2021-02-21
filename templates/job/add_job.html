@@ -13,6 +13,12 @@
       <h2 class="text-gray-900 text-lg font-medium title-font mb-5 mx-auto">
         Post Job
       </h2>
+      <div
+        class="text-sm text-center text-gray-500 bg-blue-200 p-1 mt-1 hover:text-white rounded-full my-auto bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded w-1/4 mb-3"
+      >
+        <a href="{% url 'add_category' %}">Add Category</a>
+      </div>
+
       <form action="" method="POST" novalidate>
         {% include 'partials/_message.html' %}
         <!--  -->

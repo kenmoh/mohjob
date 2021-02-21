@@ -4,57 +4,81 @@
 <!--  -->
 {% block content %}
 
-<div class="container bg-white w-75 my-5">
-  <br />
-  <div class="rounded-circle bg-width">
-    <img
-      src="{% static 'img/logo.jpg' %}"
-      class="rounded-circle img-circle-detail"
-      alt="..."
-    />
-  </div>
-  <div class="d-flex justify-content-center align-items-center">
-    <h4 class="text-center text-muted">{{ job.user.username.title }}</h4>
-    {% if job.user.is_verified %}
-    <img
-      src="{% static 'img/verified-icon.jpg' %}"
-      class="verified mr-3"
-      alt="..."
-    />
-    {% endif %}
-  </div>
-
-  <div
-    class="row border border-default m-2 bg-white rounded text-muted fs-6 w-75 mx-auto p-3"
-  >
-    <div class="col-sm-12 col-md-6 col-lg-6 border-end">
-      <h6>{{ job.title }}</h6>
-      <span>Location: {{ job.location}}</span>
+<section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-full mx-auto flex flex-wrap">
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 mx-auto">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">
+          {{ job.user.username | upper }}
+        </h2>
+        <h1 class="text-gray-600 text-xl title-font font-medium mb-4">
+          {{ job.title }}
+        </h1>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Status</span>
+          {% if job.is_closed %}
+          <span class="ml-auto text-red-400">Application Closed</span>
+          {% else %}
+          <span class="ml-auto text-green-400">Application Open</span>
+          {% endif %}
+        </div>
+        <div class="flex border-t border-gray-200 py-2">
+          <span class="text-gray-500">Date Listed</span>
+          <span class="ml-auto text-gray-900"
+            >{{ job.posted_at | timesince }}</span
+          >
+        </div>
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <span class="text-gray-500">Location</span>
+          <span class="ml-auto text-gray-900">{{ job.location }}</span>
+        </div>
+        <div class="flex mb-4">
+          <a
+            class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1"
+            >Description</a
+          >
+        </div>
+        <p class="leading-relaxed mb-4">{{ job.description }}</p>
+        <div class="flex mb-4">
+          <a
+            class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1"
+            >Skills</a
+          >
+        </div>
+        {% for skill in job.skills_as_list %}
+        <span
+          class="ext-md text-center text-gray-500 bg-gray-100 px-2 py-1 rounded-full mb-5"
+          >{{ skill }}</span
+        >
+        {% endfor %}
+        <div class="flex mb-4">
+          <a
+            class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1"
+          ></a>
+        </div>
+        <div class="flex items-center">
+          {% if job.salary %}
+          <span
+            class="text-md text-center text-gray-500 bg-gray-100 px-2 py-1 rounded-full"
+          >
+            N {{ job.salary }}
+          </span>
+          {% endif %}
+          <!--  -->
+          {% if request.user.status == 'Applicant' and not job.is_closed %}
+          <a
+            href="{% url 'job_application' job.id %}"
+            class="flex ml-auto text-white bg-indigo-500 border-0 py-1 px-6 focus:outline-none hover:bg-indigo-600 rounded"
+          >
+            APPLY TO THIS JOB
+          </a>
+          {% else %}
+          <!--  -->
+          {% endif %}
+        </div>
+      </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-6">
-      <span class="text-muted">Since: 3 days ago</span>
-    </div>
   </div>
-
-  <div class="mx-5 mt-3">
-    <h5>Description:</h5>
-    <p class="fs text-muted fw-light">{{ job.description }}</p>
-  </div>
-  <div class="mx-5">
-    <h5>Skills:</h5>
-    {% for skill in job.skills_as_list %}
-    <span class="badge rounded-pill bg-secondary mb-3">{{ skill }}</span>
-    {% endfor %}
-  </div>
-
-  <div class="mx-5">
-    <a
-      type="button"
-      class="btn btn-primary btn-sm mb-5"
-      href="{% url 'job_application' job.id %}"
-      >Apply for this job</a
-    >
-  </div>
-</div>
+</section>
 
 {% endblock content %}

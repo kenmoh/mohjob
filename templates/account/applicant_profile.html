@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load crispy_forms_tags %}
+<!--  -->
+{% block content %}
+<!--  -->
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+    <div
+      class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 mx-auto md:ml-auto w-full mt-10 md:mt-0"
+    >
+      <h2
+        class="text-gray-900 text-lg text-center font-medium title-font mb-5 mx-auto"
+      >
+        Update Profile
+      </h2>
+      <form action="" method="POST" enctype="multipart/form-data" novalidate>
+        {% include 'partials/_message.html' %}
+        <!--  -->
+        {% csrf_token %}
+        <!--  -->
+        {{ user_form | crispy }}
+        <!--  -->
+        {{ profile_form | crispy }}
+        <button
+          class="w-full text-white bg-blue-500 border-0 py-1 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
+        >
+          Update
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,27 +1,15 @@
 {% if messages %}
-<!-- ----- -->
+<!-- ============ -->
 {% for message in messages %}
-
-<div
-  id="message"
-  class="flex w-full max-w-sm mx-auto overflow-hidden bg-red-400 rounded-lg shadow-md dark:bg-gray-800"
->
-  <div class="px-4 py-2 -mx-3">
-    <div class="mx-3">
-      <span class="font-semibold text-white">
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Error |
-        <small class="text-sm text-white dark:text-gray-200">{{message}}</small>
-        <!--  -->
-        {% else %}
-        <!--  -->
-      </span>
-      <span class="font-semibold text-white">
-        <small class="text-sm text-white dark:text-gray-200">{{message}}</small>
-      </span>
+<div class="container mx-auto w-full my-3" id="message">
+  <div class="{{message.tags}}  text-center"">
+    <strong>
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Error | {% else %}
       {% endif %}
-    </div>
+    </strong>
+    {{message}}
   </div>
 </div>
 {% endfor %}
-<!-- ------>
+<!-- ========== -->
 {% endif %}

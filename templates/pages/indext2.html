@@ -4,7 +4,7 @@
 <!--  -->
 {% block content %}
 
-<div class="container">
+<div class="container mx-auto">
   <div
     class="container p-2 mx-auto max-w-2xl mt-20 flex flex-col space-y-4 justify-center items-center"
   >
@@ -22,11 +22,13 @@
           <div class="sm:text-sm font-semibold text-gray-500">
             {{ job.title }}
           </div>
-          <div class="text-sm text-gray-500">3hrs ago</div>
+          <div class="text-sm text-gray-500">
+            {{ job.posted_at | timesince }} ago
+          </div>
         </div>
         <div class="flex justify-between">
           <div class="text-lg font-medium text-gray-400">
-            {{ job.user.username.title }}
+            {{ job.user.username }}
           </div>
           <div class="text-md text-gray-500 bg-gray-100 px-2">
             {{ job.location }}
@@ -36,10 +38,20 @@
           {{ job.description|truncatechars:50 }}
         </div>
         <div class="flex border-t border-gray-300 mt-2 justify-between">
-          <div class="text-sm text-gray-500 px-2 mt-1">FINANCE</div>
-          <div class="text-sm text-gray-500 px-2 mt-1">FULL TIME</div>
+          <div class="text-sm text-gray-500 px-2 mt-1">
+            {{ job.job_type|upper }}
+          </div>
+          {% if job.salary %}
+          <div class="text-sm text-gray-500 px-2 mt-1">N {{ job.salary }}</div>
+          {% endif %}
+          <!--  -->
+          {% if job.category %}
+          <div class="text-sm text-gray-500 px-2 mt-1">
+            {{ job.category|upper }}
+          </div>
+          {% endif %}
           <div
-            class="text-sm text-gray-500 bg-blue-200 p-1 mt-1 rounded-full my-auto"
+            class="text-sm text-gray-500 bg-blue-200 p-1 mt-1 hover:text-white rounded-full my-auto bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded"
           >
             <a class="px-4 align-middle" href="{% url 'job_details' job.id %}"
               >Details</a

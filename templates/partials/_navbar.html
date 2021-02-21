@@ -29,23 +29,26 @@
         {% else %}
         class="mr-5 hover:text-white"
         {% endif %}
-        >Home</a
-      >
+        >Home
+      </a>
+    {% if request.user.status == 'Employer' %}
       <a class="mr-5 hover:text-white">Pricing</a>
-      <a href="{% url 'add_job' %}"
+      <a href="{% url 'employer_dashboard' %}"
       {% if 'add_job' in request.path %}
         class="mr-5 hover:text-white border-b-4 border-blue-500"
         {% else %}
        class="mr-5 hover:text-white"
        {% endif %}
-       >Post Jobs</a>
+       >Dashboard
+      </a>
+    {% endif %}
     </nav>
     {% if user.is_authenticated %}
     <div class="flex space-x-4">
       <span
-        class="inline-flex items-center border-0 py-1 px-3 focus:outline-none text-base mt-4 md:mt-0"
+        class="inline-flex items-center  border-0 py-1 px-3 focus:outline-none text-base mt-4 md:mt-0"
       >
-        Welcome {{ user.username }}
+        Welcome | <p class="font-bold"> {{ user.username }}</p>
       </span>
       <a
         href="{% url 'user_logout' %}"
@@ -72,7 +75,8 @@
     <div class="flex space-x-4">
       <a
         href="{% url 'sign_in' %}"
-        class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
+        class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 
+        focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
       >
         Login
         <svg

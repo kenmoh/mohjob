@@ -19,9 +19,14 @@ class MyUserAdmin(UserAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
-    list_display = ['user', 'state', 'location']
+    list_display = ['user', 'state']
+
+
+class EmployerProfileAdmin(admin.ModelAdmin):
+    model = EmployerProfile
+    list_display = ['user', 'state']
 
 
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(EmployerProfile)
+admin.site.register(EmployerProfile, EmployerProfileAdmin)

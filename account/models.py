@@ -5,7 +5,8 @@ from .states_status import STATUS_CHOICES, STATE_CHOICES
 
 class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
-    phone_number = models.CharField(max_length=35, blank=True, null=True)
+    phone_number = models.CharField(max_length=21,
+                                    unique=True, blank=True, null=True)
     status = models.CharField(
         max_length=35, choices=STATUS_CHOICES)
 
@@ -15,8 +16,8 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=75, null=True, blank=True)
     state = models.CharField(max_length=35, choices=STATE_CHOICES)
+    skills = models.CharField(max_length=200)
     about = models.TextField()
     profile_photo = models.ImageField()
 
@@ -26,7 +27,9 @@ class Profile(models.Model):
 
 class EmployerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=75, null=True, blank=True)
+    state = models.CharField(max_length=35, choices=STATE_CHOICES)
+    about = models.TextField()
+    profile_photo = models.ImageField()
 
     def __str__(self) -> str:
-        return f'{self.company_name}'
+        return f'{self.user.username}'

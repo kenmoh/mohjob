@@ -8,6 +8,7 @@ django = "*"
 pillow = "*"
 django-crispy-forms = "*"
 crispy-tailwind = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
